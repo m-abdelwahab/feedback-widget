@@ -2,7 +2,8 @@ import { ChatBubbleIcon, Cross1Icon } from '@radix-ui/react-icons';
 import * as DialogPrimitive from '@radix-ui/react-dialog';
 import { motion, AnimatePresence, useAnimationControls } from 'framer-motion';
 import { useMutation } from '@tanstack/react-query';
-import { Button } from '../shared/Button';
+import { Label, Textarea } from 'components/shared';
+import { Button } from './shared/Button';
 import { useForm } from 'react-hook-form';
 import React, { useState } from 'react';
 import cx from 'classnames';
@@ -46,9 +47,9 @@ export const Feedback = () => {
 
   const feedbackMutation = useMutation(
     async (message) => {
-      const res = await fetch('http://localhost:3000/api/feedback', {
+      const res = await fetch('<http://localhost:3000/api/feedback>', {
         method: 'POST',
-        body: JSON.stringify({ message, email: 'mahmoud3799@gmail.com' }),
+        body: JSON.stringify({ message, email: 'hey@mahmoud.codes' }),
         headers: {
           'Content-Type': 'application/json',
         },
@@ -60,8 +61,18 @@ export const Feedback = () => {
       return res.json();
     },
     {
-      onSuccess: () => toast.success('Feedback sent successfully :)'),
-      onError: () => toast.error('Something went wrong :('),
+      onSuccess: async () => {
+        await Promise.allSettled([
+          toast.success('Feedback sent successfully :)'),
+          new Promise((resolve) => setTimeout(resolve, 800)),
+        ]);
+      },
+      onError: async () => {
+        await Promise.allSettled([
+          toast.error('Something went wrong :('),
+          new Promise((resolve) => setTimeout(resolve, 800)),
+        ]);
+      },
     }
   );
 
@@ -135,37 +146,21 @@ export const Feedback = () => {
                     </DialogPrimitive.Title>
                     <form
                       onSubmit={handleSubmit(onSubmit)}
-                      className="mt-2 space-y-2"
+                      className="mt-2 space-y-4"
                     >
-                      <fieldset>
-                        <label
-                          htmlFor="message"
-                          className="text-xs sr-only font-medium text-gray-700 "
-                        >
-                          Feedback
-                        </label>
+                      <Label htmlFor="message" className="sr-only">
+                        Feedback
+                      </Label>
 
-                        <textarea
-                          {...register('message')}
-                          id="message"
-                          placeholder="What if..."
-                          rows={5}
-                          className={cx(
-                            'mt-1 mb-3 block w-full rounded-md bg-gray-200',
-                            'text-sm text-gray-1200 placeholder:text-gray-1100',
-                            'border-transparent focus-visible:border-transparent',
-                            'focus:outline-none focus:ring-2 focus:ring-violet-700 focus:ring-offset-2 focus-visible:ring-opacity-75',
-                            errors.message && 'border-red-700'
-                          )}
-                        />
-                      </fieldset>
-                      {errors.message && (
-                        <span className="text-xs text-red-1100">
-                          <>{errors.message.message}</>
-                        </span>
-                      )}
+                      <Textarea
+                        {...register('message')}
+                        id="message"
+                        placeholder="What if..."
+                        rows={5}
+                        errors={errors}
+                      />
 
-                      <div className="mt-4 flex justify-end">
+                      <div className="flex justify-end">
                         <Button type="submit" size="small">
                           Send Message
                         </Button>

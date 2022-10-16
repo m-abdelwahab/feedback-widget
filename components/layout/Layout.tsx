@@ -7,7 +7,6 @@ import {
 } from '@radix-ui/react-icons';
 import cx from 'classnames';
 import { Feedback } from 'components/Feedback';
-import { Button } from 'components/shared';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
