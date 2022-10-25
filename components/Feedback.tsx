@@ -47,7 +47,7 @@ export const Feedback = () => {
 
   const feedbackMutation = useMutation(
     async (message) => {
-      const res = await fetch('<http://localhost:3000/api/feedback>', {
+      const res = await fetch('http://localhost:3000/api/feedback', {
         method: 'POST',
         body: JSON.stringify({ message, email: 'hey@mahmoud.codes' }),
         headers: {
@@ -64,13 +64,13 @@ export const Feedback = () => {
       onSuccess: async () => {
         await Promise.allSettled([
           toast.success('Feedback sent successfully :)'),
-          new Promise((resolve) => setTimeout(resolve, 800)),
+          new Promise((resolve) => setTimeout(resolve, 2000)),
         ]);
       },
       onError: async () => {
         await Promise.allSettled([
           toast.error('Something went wrong :('),
-          new Promise((resolve) => setTimeout(resolve, 800)),
+          new Promise((resolve) => setTimeout(resolve, 2000)),
         ]);
       },
     }
