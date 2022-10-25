@@ -13,6 +13,7 @@ This project is built using the following technologies:
 - [React Hook Form](https://react-hook-form.com/)
 - [React Query](https://react-query.tanstack.com/)
 - [Radix UI](https://www.radix-ui.com/)
+- [Upstash Rate Limiter](https://github.com/upstash/ratelimit)
 
 
 ## Code overview
