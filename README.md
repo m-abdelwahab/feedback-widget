@@ -38,7 +38,7 @@ yarn install
 
 3. Rename the `.env.example` file in the root directory to `.env.local`
 
-You're going to need to create a [Postmark](https://postmarkapp.com/) account and get your server token. Then, you can replace the `POSTMARK_API_KEY` value in the `.env.local` file with your server token.
+You're going to need to create a [Postmark](https://postmarkapp.com/) account and get your server token. Then, you can replace the `POSTMARK_API_KEY` value in the `.env.local` file with your server token. You'll also need to verify an email for sending emails from Postmark. You can do that by following [this guide](https://postmarkapp.com/manual#step-2-set-up-the-address-you-plan-to-send-from).
 
 
 To set up rate limiting, you'll need to create an account on [Upstash](https://upstash.com/) and provision a new Redis instance. Then, you can replace the `UPSTASH_REDIS_REST_URL` and `UPSTASH_REDIS_REST_TOKEN` values in the `.env.local` file with your API key.
