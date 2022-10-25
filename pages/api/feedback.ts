@@ -31,7 +31,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     const { email, message } = req.body;
 
     await postmark.sendEmail({
-      From: 'testemail@gmail.com', // update this value with a verified email on Postmark
+      From: process.env.EMAIL_FROM as string, // update this value with a verified email on Postmark
       To: email,
       Subject: 'New feedback!',
       TextBody: message,
