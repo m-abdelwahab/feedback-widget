@@ -30,5 +30,5 @@ export default async function middleware(
 }
 
 export const config = {
-  matcher: '/api/hello',
+  matcher: '/api/feedback',
 };
