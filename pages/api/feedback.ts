@@ -30,17 +30,9 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
     const { email, message } = req.body;
 
-    if (!email) {
-      return res.status(422).json({ message: 'Invalid email address' });
-    }
-
-    if (!message || message.trim().length < 8) {
-      return res.status(400).json({ message: 'Message too short' });
-    }
-
     await postmark.sendEmail({
-      From: 'hey@mahmoud.codes',
-      To: 'hey@mahmoud.codes',
+      From: 'testemail@gmail.com', // update this value with a verified email on Postmark
+      To: email,
       Subject: 'New feedback!',
       TextBody: message,
       MessageStream: 'outbound',
